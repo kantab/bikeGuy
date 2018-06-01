@@ -9,27 +9,59 @@
 
 */
 
-float x=0;
-float y=50;
-float x1 = 1;
-float y1 = 1;
+int x=20;
+int y=300;
+int xpos=-1500;
+boolean start = false;
+float speed=1;
+float velocity=0;
+PImage img;
 
 void setup() {
-  size(1000,1000);
-  frameRate(60);
+  size(800, 400);
+  img = loadImage("art.png");
 }
-void draw (){
-  background (255,55,55);
+
+
+void draw() {
+  background(0);
+  image(img, x, 150);
+  if(start == true){
     
-  fill(0,0,0);
+      x-=5;
+  }
+    
+    if(x == xpos){
+      x=20;
+    }
+  
+ 
+  
+  fill(255,0,0);
   ellipseMode(CENTER);
-  ellipse(150,50+y,50,50);
-  ellipse(220,50+y,50,50);
+  ellipse(30,50+y,50,50);
+  
+   speed+=velocity;
+  y+=speed;
+
+  if (y>300) {
+    y=300;
+    speed=0;
+  } else if (y<10) {
+    velocity*=-1;
+    speed*=-1;
+  }
 }
 
+void mousePressed() {
+  speed-=10;
+  if(mousePressed == true){
+    start= true;
+  }
+}
 
-void keyPressed(){
-  if(key == ' '){
-    y+=100;
-    }
+void keyPressed() {
+  if(keyCode==UP){
+     speed-=20;
+  }
 }
